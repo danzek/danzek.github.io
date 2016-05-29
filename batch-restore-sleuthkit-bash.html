@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="4n68r blog">
+    <meta name="keywords" content="sleuthkit,bash,bash scripting,script,automate,dfir,digital forensics,computer forensics,mobile device forensics,forensic examiner,dfir blog,forensics blog">
+    <meta name="author" content="Dan O'Day">
+    <title>Batch Restore Files Using Sleuthkit and Bash Scripting - 4n68r</title>
+    <link href='https://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-size: 16px;
+            font-family: 'PT Mono', monospace;
+            font-weight: 400;
+            color: #ffffff;
+            background: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        p {
+          padding-bottom: 8px;
+        }
+
+        p.metadata {
+          font-style: italic;
+          font-size: 12px;
+          padding-bottom: 25px;
+        }
+
+        p.home-anchor {
+          padding-top: 50px;
+        }
+
+        p.footer {
+          padding-top: 100px;
+          font-size: 12px;
+          font-style: italic;
+        }
+
+        blockquote {
+          font-family: 'Lora', serif;
+        }
+
+        ul {
+          line-height: 135%;
+        }
+
+        li {
+          padding-bottom: 10px;
+        }
+
+        a {
+          color: #e3e3e3;
+          border-bottom: 1px dotted #e3e3e3;
+          text-decoration: none;
+        }
+
+        a:hover {
+          color: yellow;
+          border-bottom: 1px dotted yellow;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 10px auto;
+        }
+
+        pre {
+          font-family: 'Inconsolata', monospace;
+        }
+
+        pre.header {
+          color: yellow;
+          font-weight: bolder;
+        }
+
+        code {
+          color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <pre class="header">
+  _  _          __    ___
+ | || |  _ __  / /_  ( _ ) _ __
+ | || |_| '_ \/ '_ \ / _ \| '__|
+ |__   _| | | | (_) | (_) | |
+    |_| |_| |_|\___/ \___/|_|
+      </pre>
+
+      <h1>Batch Restore Files Using Sleuthkit and Bash Scripting</h1>
+
+      <p class="metadata">Posted by Dan O'Day on January 9, 2014</p>
+
+      <p>
+        I was performing data recovery for my brother-in-law on a failing drive and needed to recover as much data as possible.
+        After spending a few minutes restoring files one by one (on a disk where the only tool I could get to recognize the partitions
+        was Sleuthkit), I determined that a bash script was needed to batch restore the files (because repetitive work is boring and
+        time consuming).
+      </p>
+
+      <p>
+        I found <a href="http://ixti.net/administration/2012/10/25/mass-restore-files-from-corrupted-media-with-sleuthkit.html">a script for
+        mass-restoring files using Sleuthkit</a>, but it didn’t work for me. I kept getting errors related to how the
+        cut command was being used (you can’t use a string as a delimiter). Aleksey Zapparov (the creator of the original script)
+        <a href="http://ixti.net/administration/2012/10/25/mass-restore-files-from-corrupted-media-with-sleuthkit.html#comment-1137535694">informed
+        me</a> that it was supposed to be a horizontal tab character rather than blank spaces (\x09), but by that time I had already begun finding a
+        way to get it to work without that command.
+      </p>
+
+      <p>The methodology is as follows:</p>
+
+      <ul>
+        <li>Create an image of the drive (or you could work off the original, but this isn’t recommended).</li>
+        <li>Create a list of files to be restored and format the file list for easier processing using<br />
+        <pre><code>fls -f ext2 -p -r ./sdb-data 8650754 | grep -v '^..-' | grep -v '^... \*' > files.lst</code></pre>
+          (keeping in mind that I was not at all interested in deleted files since I was only recovering allocated data from a failing drive).</li>
+        <li>Run the script to restore the list.</li>
+      </ul>
+
+      <p>Here is the final working code that I used to parse the file list:</p>
+
+      <pre><code>IMAGE=$1
+LIST=$2
+DEST=$3
+
+while  IFS=$' \t:' read filetype filenode filename; do
+    if [ "$filetype" = "r/r" ]; then
+       echo "$filename"
+       mkdir -p "`dirname "$DEST/$filename"`"
+       icat -f ntfs -o 409600 -r -s $IMAGE "$filenode" > "$DEST/$filename"
+    fi
+done < $LIST</code></pre>
+
+      <p>I hope this helps save you lots of time if you ever find yourself using Sleuthkit to batch restore files.</p>
+
+      <p class="home-anchor"><a href="index.html">Return to home page</a></p>
+
+      <p class="footer">
+        &copy;2014 Dan O'Day, 4n68r.com. The opinions expressed on this blog are solely those of the author(s) &mdash; no one else's
+        (e.g. not my employers'). Feel free to click on any links you see on 4n68r.com, but just know that I do not
+        endorse, control, or promote third-party websites and I make no representations about their content. All data and
+        information provided on this site is for informational purposes only. I make no representations as to accuracy,
+        completeness, currentness, suitability, or validity of any information on this site and I will not be liable for any errors,
+        omissions, or delays in this information or any losses, injuries, or damages arising from its display or use.
+        All information is provided on an as-is basis.
+      </p>
+    </div>
+</body>
+</html>
