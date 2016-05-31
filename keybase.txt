@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/digital0day
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://4n68r.com
+  * I am digital0day (https://keybase.io/digital0day) on keybase.
+  * I have a public key with fingerprint ED5F 14F3 C51F 9CC9 0C57  809B 3FC9 7A65 5B4A 6C98
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "ed5f14f3c51f9cc90c57809b3fc97a655b4a6c98",
+            "host": "keybase.io",
+            "key_id": "3fc97a655b4a6c98",
+            "uid": "e43b8d8edf7259cd5d76e2600c09b200",
+            "username": "digital0day"
+        },
+        "service": {
+            "hostname": "4n68r.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1407515044,
+    "expire_in": 157680000,
+    "prev": "3bf284878564e10ba9678e460d784d4445f88b369b1d6bb5f521e61dd26dda9d",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v0.3.1
+Comment: https://keybase.io/crypto
+
+yMHrAnicbZFdSBRRFMd3zV1rUwyMIirZbvQhmMzszp2PhZDUICz7knxRXGfm3lmn
+1pl1djTFj0KReslKKfIhoRIyfMpC1zRYRUtTUl+0tKSHRCnwg6WHpdRmxN66L4d7
+zu//P+dwBhO2WRzWpvi7/uN9s33W0fBqmSX3e7StCggqqgSeKnANbwZJVnxYC2iy
+ogMPwAhKJCW5RUhKnChyhAgZluAEtyRyDE9DKFA8LXIsSAXFatBUGDYCH8Rpsmrk
+jI9XRkb2P3zZZgFTboFFLEYS44KciCBiaOyiCUI0urgIwgSDWFP4EmzQSPbJOu8n
+EF8JalKBUSiXRWyObXbfgiiFZrU0US0xtAFN1VVR9RvpYl0PeEyVXhkwsetY8G4Z
+eAVZQcbehqAca0FZVYCHNEhRl01HkiIYSEKColIBrgjIGvbKJgEZmiWMZ7bB5eaW
+guRiKZZhIU1hkhB4jmZYTNEEYlgKURQFJZYV3DQnkIgWBChBF4lpEiEXjRDPIWCu
+VKqowOM2xuR9hmVQ9im8XqZhUDMQLoi1WB0Wuy3GvJzFsWPXv3vO2OI2aqmsqh+t
+pXOZ63kDb6enrrT3Dk6M4NEVtLJ2O2ei+f6RSOnHpJQ3K42h4bp7Gzb+ef78RlPO
+5OyrSE23pdW+uO9g5NH8VHXv2jMYGQpdCNlB1tW2osb339LrirpuhGLHtpMZnz5Y
+JWnUkXirJ7l5obY9s/Nd91IcV1174nBL8Uj09J3x1n723GK0xTF+aGrW+WvPsfQ8
+7uXab//QSKKdWEr/erQgoYLLXqw/k9wFp50Xe2LOPv3zsP1kc/b+hifh4Qw+vj53
+/EGg45TsWwBfCp0/d+uof/lmwuMXhZcONM4tfx64vLNhfXXv65z8zs7zRZPRGdvQ
+fMxYUlqHP8X5FxswHWg=
+=LFJ0
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/digital0day
+
+==================================================================
